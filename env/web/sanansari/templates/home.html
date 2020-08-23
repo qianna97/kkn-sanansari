@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<style>
+    #post {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    #profile {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+</style>
+
+<section id="home" class="video-hero" style="height: 500px; background-image: url(../../static/images/cover_home);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+<div class="overlay"></div>
+<div class="display-t text-center">
+	<div class="display-tc">
+		<div class="container">
+			<div class="col-md-12 col-md-offset-0">
+				<div class="animate-box">
+					<h2 style="margin-bottom: 150px;">Selamat Datang di Dusun Sanansari</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+<div class="colorlib-featured">
+<div class="row animate-box">
+	<div class="featured-wrap">
+		<div class="owl-carousel">
+			{% for slide in slides %}
+			<div class="item">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="featured-entry">
+						<img class="img-responsive" src="static/images/{{ slide }}" alt="">
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="colorlib-services colorlib-bg-white">
+<div class="container">
+	<div class="desc">
+		<h2>Dusun Sanansari</h2>
+		<div class="features">
+			<div class="f-desc">
+				<p id="profile">{{ profiles.profil|striptags }}</p>
+			</div>
+		</div>
+		<p><a href={{ url_for('profil_page') }} class="btn btn-primary btn-outline with-arrow">Selengkapnya <i class="icon-arrow-right3"></i></a></p>
+	</div>
+</div>
+</div>
+
+<div class="colorlib-services colorlib-bg-white">
+<div class="container">
+	<div class="desc">
+		<h2>Kampung KB Sanansari</h2>
+		<div class="features">
+			<div class="f-desc">
+				<p id="profile">{{ profiles.profil_kb|striptags }}</p>
+			</div>
+		</div>
+		<p><a href={{ url_for('kb') }} class="btn btn-primary btn-outline with-arrow">Selengkapnya <i class="icon-arrow-right3"></i></a></p>
+	</div>
+</div>
+</div>
+
+<div class="colorlib-work">
+<div class="container">
+	<div class="desc">
+		<h2>Statistik Kampung KB</h2>
+		<div class="col-md-4 animate-box">
+			<div class="work-grid">
+				<a href="#" class="work-img" style="background-image: url(../../static/images/jml.jpg)">
+				</a>
+				<div class="desc">
+					<h2><a href="#">Jumlah penduduk</a></h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 animate-box">
+			<div class="work-grid">
+				<a href="#" class="work-img" style="background-image: url(../../static/images/kk.jpg)">
+				</a>
+				<div class="desc">
+					<h2><a href="#">Visualisasi Data KK</a></h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 animate-box">
+			<div class="work-grid">
+				<a href="#" class="work-img" style="background-image: url(../../static/images/pus.png)">
+				</a>
+				<div class="desc">
+					<h2><a href="#">Pasangan Usia Subur</a></h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p><a href={{ url_for('statistik') }} class="btn btn-primary btn-outline with-arrow">Selengkapnya <i class="icon-arrow-right3"></i></a></p>
+</div>
+</div>
+
+<div class="colorlib-services colorlib-bg-white">
+<div class="container">
+	<div class="desc">
+		<h2>Artikel</h2>
+		{% for post in posts %}
+		<div class="col-md-4 animate-box">
+			<article>
+				<h2><a href={{ url_for('get_post', id=post.id) }}>{{ post.title }}</a></h2>
+				<p class="admin"><span>{{ post.date_posted }}</span></p>
+				<p id="post">{{ post.content|striptags }}</p>
+			</article>
+		</div>
+		{% endfor %}
+		<p><a href={{ url_for('get_all_post') }} class="btn btn-primary btn-outline with-arrow">Selengkapnya <i class="icon-arrow-right3"></i></a></p>
+	</div>
+</div>
+</div>
+
+<div class="colorlib-pricing">
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+			<h2>Potensi</h2>
+			<p>Berikut merupakan produk dari kampung Sanansari</p>
+		</div>
+	</div>
+	<div class="row">
+    {% for p in produk %}
+    <div class="col-md-3 text-center animate-box">
+			<div class="pricing">
+				<h2 class="pricing-heading">Produk {{ p.jenis }}</h2>
+				<img class="product-img" src="static/images/produk_images/{{ p.img }}" alt="">
+				<p>Produk {{ p.jenis }} seperti {{ p.prod }} dari Sanansari.</p>
+				<p><a href="#" class="btn btn-primary">Beli Produk</a></p>
+			</div>
+		</div>
+    {% endfor %}
+	</div>
+</div>
+</div>
+{% endblock %}

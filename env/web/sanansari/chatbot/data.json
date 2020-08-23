@@ -1,0 +1,482 @@
+{
+        "intents": [
+                {
+                        "tag": "sambutan",
+                        "patterns": [
+                                "Hai",
+                                "Halo",
+                                "Hello",
+                                "Hallo",
+                                "Assalamualaikum",
+                                "Selamat pagi",
+                                "Selamat siang",
+                                "Selamat sore",
+                                "Selamat malam"
+                        ],
+                        "responses": [
+                                "Hai, ada yang dapat kami bantu ?",
+                                "Hallo, ada yang bisa dibantu ?"
+                        ],
+                        "context_set": ""
+                },
+                {
+                        "tag": "tutup",
+                        "patterns": [
+                                "Bye",
+                                "See you later",
+                                "Goodbye",
+                                "Sampai jumpa lagi",
+                                "Selamat tinggal"
+                        ],
+                        "responses": [
+                                "Terimakasih sudah berkunjung",
+                                "Semoga harimu menyenangkan",
+                                "Sampai jumpa lagi"
+                        ]
+                },
+                {
+                        "tag": "terimakasih",
+                        "patterns": [
+                                "makasih",
+                                "terimakasih",
+                                "oh gitu makasih",
+                                "terima kasih",
+                                "oke makasih"
+                        ],
+                        "responses": [
+                                "Senang dapat membantu",
+                                "Sama sama",
+                                "Kembali kasih"
+                        ]
+                },
+                {
+                        "tag": "apa",
+                        "patterns": [
+                                "kamu itu apa?",
+                                "kamu?",
+                                "kamu itu siapa?",
+                                "siapa kamu?",
+                                "apa kamu?",
+                                "siapa anda?",
+                                "apa anda?"
+                        ],
+                        "responses": [
+                                "Saya adalah asisten yang dapat membantu mencari jawaban seputar KB dan Kampung KB",
+                                "Saya adalah bot yang dibuat untuk membantu mencari jawaban seputar KB dan Kampung KB",
+                                "Saya adalah bot KB, ayo ajukan pertanyaan tentang KB"
+                        ]
+                },
+                {
+                        "tag": "siapa",
+                        "patterns": [
+                                "siapa yang membuat kamu?",
+                                "siapa yang bikin kamu?",
+                                "siapa yang merancang kamu?"
+                        ],
+                        "responses": [
+                                "Saya dibuat oleh tim KKN-PPM UGM Periode 2 Tahun 2020 yang bertugas di Srimartani, Kab.Bantul dengan kode 2020-YO173"
+                        ]
+                },
+                {
+                        "tag": "pengertian-kampungkb",
+                        "patterns": [
+                                "Apa itu Kampung KB?",
+                                "Kampung KB?",
+                                "Kampung KB iki opo?"
+                        ],
+                        "responses": [
+                                "Kampung KB adalah satuan wilayah setingkat desa dengan kriteria tertentu dimana terdapat keterpaduan program KKBPK dan pembangunan sektor terkait dalam upaya meningkatkan kualitas hidup keluarga dan masyarakat"
+                        ]
+                },
+                {
+                        "tag": "kriteria-kampungkb",
+                        "patterns": [
+                                "Apa kriteria Kampung KB?"
+                        ],
+                        "responses": [
+                                "Kriteria Kampung KB berupa : jumlah peserta KB dan Keluarga Pra S KS 1 diatas rata-rata dengan kriteria wilayah : pesisir, terpencil, daerah aliran sungai (DAS), bantaran kereta api, terpencil, padat penduduk dan kawasan wisata"
+                        ]
+                },
+                {
+                        "tag": "indikator-kampungkb",
+                        "patterns": [
+                                "Apa indikator keberhasilan Kampung KB?"
+                        ],
+                        "responses": [
+                                "Indikator keberhasilan Kampung KB berupa : setiap keluarga mampu melaksanakan fungsi secara optimal, terbinanya kesertaan ber-KB, tersediaanya pusat pelayanan KKBPK, meningkatkatnya partisipasi keluarga dalam kelompok kegiatan, tumbuhnya gotong royong dan pembangunan sektor lainnya."
+                        ]
+                },
+                {
+                        "tag": "tujuan-kampungkb",
+                        "patterns": [
+                                "Apa tujuan Kampung KB?"
+                        ],
+                        "responses": [
+                                "Meningkatkatkan kualitas hidup keluarga dan masyarakat melalui strategi mendekatkan pelayanan KKBPK, penguatan fungsi keluarga, partisipasi aktif masyarakat dan pembangunan terintegrasi lintas sektor"
+                        ]
+                },
+                {
+                        "tag": "latar-kampungkb",
+                        "patterns": [
+                                "Apa latar belakang Kampung KB?",
+                                "Kenapa ada Kampung KB?"
+                        ],
+                        "responses": [
+                                "Kampung KB dibentuk karena: Program KB tidak lagi bergema dan terdengar gaungnya seperti pada era Orde Baru, untuk meningkatkan kualitas hidup masyarakat dikampung, penguatan program KKBPK yang dikelola dan diselenggarakan dari, oleh dan untuk masyarakat, mewujudkan cita-cita pembangunan Indonesia, mengangkat dan menggairahkan kualitas hidup masyarakat Indonesia"
+                        ]
+                },
+                {
+                        "tag": "syarat-kampungkb",
+                        "patterns": [
+                                "Apa syarat dibentuknya Kampung KB?"
+                        ],
+                        "responses": [
+                                "Pertama, tersedianya data kependudukan yang akurat. Kedua, dukungn dan komitmen Pemerintah Daerah. Ketiga, partisipasi aktif masyarakat."
+                        ]
+                },
+                {
+                        "tag": "sasaran-kampungkb",
+                        "patterns": [
+                                "Apa sasaran Kampung KB?"
+                        ],
+                        "responses": [
+                                "Sasaran subyek dan obyek dari Kampung KB adalah keluarga, PUS, lansia dan remaja. Sedangkan sasaran sektoral seperti Kepala Desa, Ketua RT/RW, PKB, TP PKK, IMP, PPKBD, tokoh masyarakat, adat dan agama serta kader pembangunan lainnya."
+                        ]
+                },
+                {
+                        "tag": "pengertian-kb",
+                        "patterns": [
+                                "Apa itu keluarga berencana?",
+                                "Apa itu KB?"
+                        ],
+                        "responses": [
+                                "Keluarga berencana (disingkat KB) adalah gerakan untuk membentuk keluarga yang sehat dan sejahtera dengan membatasi kelahiran. Itu bermakna adalah perencanaan jumlah keluarga dengan pembatasan yang bisa dilakukan dengan penggunaan alat-alat kontrasepsi atau penanggulangan kelahiran seperti kondom, spiral, IUD, dan sebagainya."
+                        ]
+                },
+                {
+                        "tag": "tujuan-kb",
+                        "patterns": [
+                                "Apa tujuan keluarga berencana?",
+                                "Apa tujuan KB?"
+                        ],
+                        "responses": [
+                                "Meningkatkan kesejahteraan ibu, anak dalam rangka mewujudkan NKKBS (Norma Keluarga Kecil Bahagia Sejahtera) yang menjadi dasar terwujudnya masyarakat yang sejahtera dengan mengendalikan kelahiran sekaligus menjamin terkendalinya pertambahan penduduk."
+                        ]
+                },
+                {
+                        "tag": "manfaat-kb",
+                        "patterns": [
+                                "Apa manfaat keluarga berencana?",
+                                "Apa manfaat KB?"
+                        ],
+                        "responses": [
+                                "Keluarga Berencana dapat mencegah munculnya bahaya-bahaya akibat : Kehamilan dini, kehamilan terlambat, kehamilan yang berdesakan jaraknya dan terlalu sering hamil dan melahirkan."
+                        ]
+                },
+                {
+                        "tag": "pengertian-kontrasepsi",
+                        "patterns": [
+                                "Apa itu kontrasepsi?"
+                        ],
+                        "responses": [
+                                "Kontrasepsi merupakan usaha-usaha untuk mencegah terjadinya kehamilan. Usaha-usaha itu dapat bersifat sementara, dapat juga bersifat permanen."
+                        ]
+                },
+                {
+                        "tag": "macam-kontrasepsi",
+                        "patterns": [
+                                "Macam-macam kontrasepsi?",
+                                "Contoh kontrasepsi?",
+                                "Jenis kontrasepsi?"
+                        ],
+                        "responses": [
+                                "Metode sederhana : Kalender, Amenorea Laktasi (MAL), Suhu tubuh, Senggama terputus. Metode Barrier: Kondom, Diafragma, Spermisida. Metode Modern: Pil, Implan, Alat Kontrasepsi Dalam Lahir (AKDR), Kontrasepsi Mantap (KONTAP), Suntikan, IUD."
+                        ]
+                },
+                {
+                        "tag": "metode-kalender",
+                        "patterns": [
+                                "Apa itu metode kalender?",
+                                "Kontrasepsi metode kalender"
+                        ],
+                        "responses": [
+                                "Menurut penjelasan Glaiser pada tahun 2005, metode kalender didasarkan pada suatu perhitungan yang diperoleh dari informasi yang dikumpulkan dari sejumlah menstruasi secara berurutan. Untuk mengidentifikasi hari subur, dilakukan pencatatan siklus menstruasi dengan durasi minimal 6 dan dianjurkan 12 siklus. Untuk menjamin efektivitas maksimum, metode kalender sebaiknya dikombinasikan dengan indikator-indikator lainnya."
+                        ]
+                },
+                {
+                        "tag": "metode-mal",
+                        "patterns": [
+                                "Apa itu MAL?",
+                                "Kontrasepsi metode amenorea laktasi",
+                                "Kontrasepsi menyusui"
+                        ],
+                        "responses": [
+                                "Berdasarkan pemaparan Saifudin pada 2006, Menyusui eksklusif merupakan suatu metode kontrasepsi sementara yang cukup efektif, selama klien belum mendapat haid dan waktunya kurang dari enam bulan pasca persalinan. Efektifnya dapat mencapai 98%. MAL efektif bila menyusui lebih dari delapan kali sehari dan bayi mendapat cukup asupan perlaktasi."
+                        ]
+                },
+                {
+                        "tag": "metode-suhu",
+                        "patterns": [
+                                "Apa itu kontrasepsi metode suhu tubuh?",
+                                "Kontrasepsi metode suhu tubuh",
+                                "suhu tubuh"
+                        ],
+                        "responses": [
+                                "Menurut Glaiser pada 2006, Saat ovulasi peningkatan progesteron menyebabkan peningkatan suhu basal tubuh (SBT) sekitar 0,2°C-0,4°C. Peningkatan suhu tubuh adalah indikasi bahwa telah terjadi ovulasi. Selama 3 hari berikutnya memperhitungkan waktu ekstra dalam masa hidup sel telur diperlukan pantang berhubungan intim. Metode suhu mengidentifikasi akhir masa subur bukan awalnya."
+                        ]
+                },
+                {
+                        "tag": "metode-iud",
+                        "patterns": [
+                                "Apa itu kontrasepsi metode IUD?",
+                                "Kontrasepsi IUD",
+                                "IUD"
+                        ],
+                        "responses": [
+                                "IUD juga merupakan jenis kontrasepsi yang banyak digunakan perempuan Indonesia. IUD adalah kontrasepsi berbentuk T dan tidak terlalu besar yang dimasukkan ke dalam rahim perempuan."
+                        ]
+                },
+                {
+                        "tag": "metode-putus",
+                        "patterns": [
+                                "Apa itu metode senggama terputus?",
+                                "Kontrasepsi terputus",
+                                "Menahan ejakulasi"
+                        ],
+                        "responses": [
+                                "Senggama terputus adalah metode keluarga berencana tradisional, dimana pria mengeluarkan alat kelaminnya (penis) dari vagina sebelum pria mencapai ejakulasi. Efektifitas bergantung pada kesediaan pasangan untuk melakukan senggama terputus setiap pelaksanaannya (angka  kegagalan 4–18 kehamilan per 100 wanita). Berikut merupakan pernjelasan dari Saifuddin, 2006."
+                        ]
+                },
+                {
+                        "tag": "metode-kondom",
+                        "patterns": [
+                                "Apa itu metode kondom?",
+                                "Kontrasepsi kondom"
+                        ],
+                        "responses": [
+                                "Kondom merupakan selubung atau sarung karet yang dapat dibuat dari berbagai bahan diantaranya lateks (karet), plastik(vinil), atau bahan alami (produksi hewan) yang dipasang pada penis saat berhubungan seksual. Kondom tidak hanya mencegah kehamilan tetapi juga mencegah Infeksi Menular Seksualtermasuk HIV/AIDS."
+                        ]
+                },
+                {
+                        "tag": "metode-diafragma",
+                        "patterns": [
+                                "Apa itu metode diafragma?",
+                                "Kontrasepsi diafragma"
+                        ],
+                        "responses": [
+                                "Diafragma adalah kap berbentuk bulat cembung, terbuat dari lateks (karet) yang di insersikan ke dalam vagina sebelum berhubungan seksualdan menutup serviks."
+                        ]
+                },
+                {
+                        "tag": "metode-spermisida",
+                        "patterns": [
+                                "Apa itu metode spermisida?",
+                                "Kontrasepsi spermisida"
+                        ],
+                        "responses": [
+                                "Spermisida adalah bahan kimia (non  oksinol-9) digunakan untuk menonaktifkan atau membunuh sperma. Dikemas dalam bentuk aerosol (busa), tablet vaginal suppositoria, atau dissolvable film, dan dalam bentuk krim."
+                        ]
+                },
+                {
+                        "tag": "metode-pil",
+                        "patterns": [
+                                "Apa itu metode pil?",
+                                "Kontrasepsi pil"
+                        ],
+                        "responses": [
+                                "Kontrasepsi pil merupakan jenis kontrasepsi oral yang harus diminum setiap hari yang bekerja mengentalkan lendir serviks sehingga sulit dilalui oleh sperma."
+                        ]
+                },
+                {
+                        "tag": "metode-implan",
+                        "patterns": [
+                                "Apa itu metode implan?",
+                                "Kontrasepsi implan"
+                        ],
+                        "responses": [
+                                "Kontrasepsi implantadalah alat kontrasepsi silastik berisi hormon jenis progesteron levonorgestrel yang ditanamkan dibawah kulit, yang bekerja mengurangi transportasi sperma."
+                        ]
+                },
+                {
+                        "tag": "metode-akdr",
+                        "patterns": [
+                                "Apa itu metode alat kontrasepsi dalam rahim?",
+                                "Kontrasepsi akdr",
+                                "dalam rahim"
+                        ],
+                        "responses": [
+                                "Alat kontrasepsi dalam rahim adalah alat kontrasepsi yang dimasukkan dalam rongga rahim wanita yang bekerja menghambat sperma untuk masuk ke tuba fallopii."
+                        ]
+                },
+                {
+                        "tag": "metode-kontap",
+                        "patterns": [
+                                "Apa itu metode kontap?",
+                                "Kontrasepsi mantap",
+                                "kontap"
+                        ],
+                        "responses": [
+                                "Kontrasepsi mantap merupakansuatu cara permanen baik pada pria dan pada wanita, dilakukan dengan tindakan operasi kecil untuk mengikat atau menjepit atau memotong saluran telur (wanita), atau menutup saluran mani laki-laki. Begitu menurut Siswosudarmo pada tahun 2006."
+                        ]
+                },
+                {
+                        "tag": "keuntungan-implan",
+                        "patterns": [
+                                "keuntungan metode implan",
+                                "kelebihan metode impalan"
+                        ],
+                        "responses": [
+                                "(1) Cara ini cocok untuk wanita yang tidak boleh menggunakan obat yang mengandung estrogen. (2) Perdarahan yang terjadi lebih ringan. (3) Tidak menaikan tekanan darah. (4) Risiko terjadinya kehamilan ektopik lebih kecil jika dibandingkan dengan pemakaian Alat Kontrasepsi Dalam Rahim (AKDR). (5) Dapat digunakan untuk jangka panjang (5 tahun) dan bersifat reversible."
+                        ]
+                },
+                {
+                        "tag": "kerugian-implan",
+                        "patterns": [
+                                "kerugian metode implan",
+                                "kekurangan metode impalan",
+                                "efek samping metode implan"
+                        ],
+                        "responses": [
+                                "(1) Norplant menyebabkan kekacauan dalam pola perdarahan hingga 80% pengguna, terutama selama tahun pertama penggunaan, dan beberapa wanita atau pasangannya tidak dapat menerima perubahan ini. (2) Implantharus dipasang (disisipkan) dan diangkat melalui prosedur pembedahan yang dilakukan oleh tenaga terlatih. Wanita tidak dapat memulai atau menghentikan metode tersebut tanpa bantuan klinisi. (3) Karena penyisipan dan pengangkatan Norplant membutuhkan prosedur bedah minor, biaya pemulaian dan penghentian akan lebih tinggi dibandingkan dengan kontrasepsi oralatau metode perintang. (4) Implan dapat dilihat di bawah kulit. (5) Implan tidak diketahui memberikan perlindungan terhadap penyakit menular seksualsepertiherpes, papilomavirus manusia, HIV, gonore atau klamidia. (6) Selain itu efek samping dari implantadalah sakit kepala, kadang-kadang terjadi perubahan pola libido dan berat badan, timbulnya jerawat."
+                        ]
+                },
+                {
+                        "tag": "keuntungan-pil",
+                        "patterns": [
+                                "keuntungan metode pil",
+                                "kelebihan metode pil"
+                        ],
+                        "responses": [
+                                "(1) Pil KB tidak memengaruhi kesuburan, jadi meskipun Anda meminumnya dalam jangka waktu yang lama, masih bisa hamil setelah berhenti mengonsumsi pil kontrasepsi tersebut. (2) Pil KB juga dapat mengatasi berbagai gangguan kesehatan seperti mengatasi nyeri haid, mencegah kurang darah dan mencegah penyakit kanker."
+                        ]
+                },
+                {
+                        "tag": "kerugian-pil",
+                        "patterns": [
+                                "kerugian metode pil",
+                                "kekurangan metode pil",
+                                "efek samping metode pil"
+                        ],
+                        "responses": [
+                                "(1) Penggunaan pil KB pada bulan pertama mungkin akan menimbulkan efek samping, misalnya mual, perdarahan atau flek di masa haid, kenaikan berat badan, hingga sakit kepala. Namun, efek ini tidaklah berbahaya. (2) Jika Anda masih menyusui, sebaiknya konsultasi dulu dengan dokter sebelum memakai pil KB. Pasalnya, tidak semua pil KB bisa digunakan oleh ibu menyusui. Sebagian pil KB, terutama pil KB dengan hormon kombinasi progresteron dan estrogen dapat menghentikan produksi air susu ibu (ASI)."
+                        ]
+                },
+                {
+                        "tag": "keuntungan-suntik",
+                        "patterns": [
+                                "keuntungan metode suntik",
+                                "kelebihan metode suntik"
+                        ],
+                        "responses": [
+                                "(1) Suntik KB aman digunakan bagi wanita menyusui setelah 6 minggu pascapersalinan."
+                        ]
+                },
+                {
+                        "tag": "kerugian-suntik",
+                        "patterns": [
+                                "kerugian metode suntik",
+                                "kekurangan metode suntik",
+                                "efek samping metode suntik"
+                        ],
+                        "responses": [
+                                "(1) Keluar flek-flek. (2) Perdarahan ringan di antara dua masa haid. (3) Sakit kepala. (4) Kenaikan berat badan (5) Jika Anda menghentikan penggunaannya, Anda bisa hamil lagi dengan segera."
+                        ]
+                },
+                {
+                        "tag": "keuntungan-kondom",
+                        "patterns": [
+                                "keuntungan metode kondom",
+                                "kelebihan metode kondom"
+                        ],
+                        "responses": [
+                                "(1) Selain kehamilan, kondom juga bisa mencegah penularan penyakit kelamin, termasuk infeksi HIV/AIDS."
+                        ]
+                },
+                {
+                        "tag": "kerugian-kondom",
+                        "patterns": [
+                                "kerugian metode kondom",
+                                "kekurangan metode kondom",
+                                "efek samping metode kondom"
+                        ],
+                        "responses": [
+                                "(1) Penggunaan kondom bagi sebagian orang dapat menimbulkan alergi dari bahan yang digunakan untuk membuat alat kontrasepsi ini. (2) Pada pemakaian yang tidak tepat, kondom bisa terlepas. Jika terjadi hal tersebut, kehamilan pun bisa terjadi."
+                        ]
+                },
+                {
+                        "tag": "keuntungan-iud",
+                        "patterns": [
+                                "keuntungan metode iud",
+                                "kelebihan metode iud"
+                        ],
+                        "responses": [
+                                "(1) Bisa digunakan dalam jangka waktu yang lama. (2) Sangat efektif."
+                        ]
+                },
+                {
+                        "tag": "kerugian-iud",
+                        "patterns": [
+                                "kerugian metode iud",
+                                "kekurangan metode iud",
+                                "efek samping metode iud"
+                        ],
+                        "responses": [
+                                "(1) Masa haid berubah lama dan banyak. (2) Ada kemungkinan infeksi panggul."
+                        ]
+                },
+                {
+                        "tag": "kb-gendut",
+                        "patterns": [
+                                "apakah KB bikin gendut",
+                                "nambah berat badan",
+                                "kb bikin gemuk"
+                        ],
+                        "responses": [
+                                "Belum terbukti secara ilmiah kalau KB khususnya KB Hormonal pasti bikin berat badan naik, namun jika itu terjadi bersifat sementara dan tidak sampai membuat tubuh obesitas. Jika anda ingin tetap menghindari kemungkinan pertambahan berat badan, pilihlah metode KB nonhormonal seperti: IUD, Kondom, Diafragma dan lainnya."
+                        ]
+                },
+                {
+                        "tag": "kb-haid-tdk-teratur",
+                        "patterns": [
+                                "apakah KB bikin haid tidak teratur",
+                                "siklus haid tidak teratur",
+                                "kb bikin susah haid",
+                                "menstruasi tidak teratur"
+                        ],
+                        "responses": [
+                                "Pil KB yang mengandung hormon estrogen justru dapat membantu siklus mestruasi menjadi lebih teartur."
+                        ]
+                },
+                {
+                        "tag": "kb-susah-hamil",
+                        "patterns": [
+                                "apakah KB lama-lama bikin susah hamil",
+                                "susah hamil karena terlalu lama KB",
+                                "kb bikin susah hamil"
+                        ],
+                        "responses": [
+                                "Setelah berhenti mengkonsumsi pil KB, peluang untuk hamil justru sangat besar. Bahkan, lupa tidak minum pil KB selama 3 hari berturut-turut lalu berhubungan seksual, sudah bisa memungkinkan seorang wanita untuk hamil."
+                        ]
+                },
+                {
+                        "tag": "kb-jerawat",
+                        "patterns": [
+                                "apakah KB bikin jerawat",
+                                "jerawatan karena KB"
+                        ],
+                        "responses": [
+                                "Pil KB memiliki kandungan anti-androgenik dan anti-mineralokortikoid. Kandungan anti-androgenik ini bisa membantu mengurangi sebum, mengurangi masalah mudah berjerawat, serta mempercantik kulit dan rambut."
+                        ]
+                },
+                {
+                        "tag": "kb-kanker",
+                        "patterns": [
+                                "apakah KB bikin kanker",
+                                "kanker karena KB"
+                        ],
+                        "responses": [
+                                "Menurut Ronald Burkman, dokter kandungan di Amerika Serikat, pil KB justru mencegah kanker ovarium dan rahim. Oleh karena itu, munculnya anggapan bawa pil KB merupakan penyebab masalah ini tidak terbukti."
+                        ]
+                }
+        ]
+}

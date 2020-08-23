@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section id="home" class="video-hero" style="height: 500px; background-image: url(../../static/images/cover_posts);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+    <div class="overlay"></div>
+    <div class="display-t display-t2 text-center">
+        <div class="display-tc display-tc2">
+            <div class="container">
+                <div class="col-md-12 col-md-offset-0">
+                    <div class="animate-box">
+                        <h2>{{ title }}</h2>
+                        <p class="breadcrumbs"><span><a href="index.html">{{ category }}</a></span> <span>{{ date }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    p {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+</style>
+<div class="colorlib-services colorlib-bg-white">
+    <div class="container">
+        <div class="desc">
+            {% for post in data %}
+            <div class="row animate-box">
+                <article>
+                    <h2><a href={{ url_for('get_post', id=post.id) }}>{{ post.title }}</a></h2>
+                    <p class="breadcrumbs"><span><a href={{ url_for('get_category', category_id=post.category_id) }}>{{ post.category_name }}</a></span><span> | {{ post.date_posted }}</span></p>
+                    <p>{{ post.content|striptags }}
+                    </p>
+                    <p><a href={{ url_for('get_post', id=post.id) }} class="btn btn-primary btn-outline with-arrow">Selengkapnya <i class="icon-arrow-right3"></i></a></p>
+                </article>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="pagination">
+                        {% if title == "Artikel" %}
+                            {% if has_prev %}
+                                <li><a href={{ url_for('get_post_for_page', page=page|int-1) }}>&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><a href="#">&laquo;</a></li>
+                            {% endif %}
+                            <li class="active"><a href="#">{{ page }}</a></li>
+                            {% if has_next %}
+                                <li><a href={{ url_for('get_post_for_page', page=page|int+1) }}>&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><a href="#">&raquo;</a></li>
+                            {% endif %}
+                        {% else %}
+                            {% if has_prev %}
+                                <li><a href={{ url_for('get_category_for_page', category_id=category_id, page=page|int-1) }}>&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><a href="#">&laquo;</a></li>
+                            {% endif %}
+                            <li class="active"><a href="#">{{ page }}</a></li>
+                            {% if has_next %}
+                                <li><a href={{ url_for('get_category_for_page', category_id=category_id, page=page|int+1) }}>&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><a href="#">&raquo;</a></li>
+                            {% endif %}
+                        {% endif %}
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

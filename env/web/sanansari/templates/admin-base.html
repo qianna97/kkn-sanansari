@@ -1,0 +1,1928 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Sanansari | Admin</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+        <link rel="stylesheet" href={{ url_for('static', filename='adm/css/style.css') }}>
+        <link rel="stylesheet" href={{ url_for('static', filename='adm/css/toastr.min.css') }}>
+        <link rel="stylesheet" href={{ url_for('static', filename='adm/css/datepicker.css') }}>
+        <link rel="stylesheet" href={{ url_for('static', filename='adm/css/summernote.css') }}>
+    </head>
+
+    <style>
+        .nopadding {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        table#tbl-data-warga {
+            border-collapse: collapse;
+        }
+        #tbl-data-warga tr:hover {
+            background-color:deepskyblue;
+        }
+        #tbl-data-warga td:hover {
+            cursor: pointer;
+        }
+        table#tbl-data-pus {
+            border-collapse: collapse;
+        }
+        #tbl-data-pus tr:hover {
+            background-color: deepskyblue;
+        }
+        #tbl-data-pus td:hover {
+            cursor: pointer;
+        }
+        table#tbl-data-post {
+            border-collapse: collapse;
+        }
+        #tbl-data-post tr:hover {
+            background-color: deepskyblue;
+        }
+        #tbl-data-post td:hover {
+            cursor: pointer;
+        }
+        table#tbl-data-balita {
+            border-collapse: collapse;
+        }
+        #tbl-data-balita tr:hover {
+            background-color: deepskyblue;
+        }
+        #tbl-data-balita td:hover {
+            cursor: pointer;
+        }
+        table#tbl-data-hamil {
+            border-collapse: collapse;
+        }
+        #tbl-data-hamil tr:hover {
+            background-color: deepskyblue;
+        }
+        #tbl-data-hamil td:hover {
+            cursor: pointer;
+        }
+        table#tbl-data-bersalin {
+            border-collapse: collapse;
+        }
+        #tbl-data-bersalin tr:hover {
+            background-color: deepskyblue;
+        }
+        #tbl-data-bersalin td:hover {
+            cursor: pointer;
+        }
+        table#tbl-data-produk {
+            border-collapse: collapse;
+        }
+        #tbl-data-produk tr:hover {
+            background-color: deepskyblue;
+        }
+        #tbl-data-produk td:hover {
+            cursor: pointer;
+        }
+    </style>
+
+    <body style="background-color: #f6f6f6;">
+        {% block container %}{% endblock %}
+    </body>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-post" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail Blog</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-post">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Judul</td>
+                            <td><input type="text" class="form-control border" id="detail-title"></td>
+                        </tr>
+                        <tr>
+                            <td>Kategori</td>
+                            <td>
+                                <select class="form-control border" id="detail-category">
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div>
+                        <textarea id="summernote2" name="content-detail"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="listPostEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" id="modal-add-category" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Kategori</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><input type="text" class="form-control border" id="category-name"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="addCategory()" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" id="modal-edit-category" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Edit Kategori</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" class="form-control border" id="edit-category-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><input type="text" class="form-control border" id="edit-category-name"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="editCategory()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-warga" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail Warga</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Nama</td>
+                            <td><input type="text" class="form-control border" id="detail-nama"></td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td><input type="text" class="form-control border" id="detail-nik"></td>
+                        </tr>
+                        <tr>
+                            <td>No KK</td>
+                            <td><input type="text" class="form-control border" id="detail-kk"></td>
+                        </tr>
+                        <tr>
+                            <td>Hubungan KK</td>
+                            <td>
+                                <select class="form-control border" id="detail-hubungan">
+                                    <option>-</option>
+                                    <option>KEPALA KELUARGA</option>
+                                    <option>SUAMI</option>
+                                    <option>ISTERI</option>
+                                    <option>ANAK</option>
+                                    <option>MENANTU</option>
+                                    <option>CUCU</option>
+                                    <option>ORANG TUA</option>
+                                    <option>MERTUA</option>
+                                    <option>FAMILI LAIN</option>
+                                    <option>PEMBANTU</option>
+                                    <option>LAINNYA</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td>
+                                <select class="form-control border" id="detail-kelamin">
+                                    <option>LAKI-LAKI</option>
+                                    <option>PEREMPUAN</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td>
+                                <input type="text" class="form-control border" data-toggle="datepicker" id="detail-tanggal-lahir">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Agama</td>
+                            <td><input type="text" class="form-control border" id="detail-agama"></td>
+                        </tr>
+                        <tr>
+                            <td>Pendidikan</td>
+                            <td>
+                                <select class="form-control border" id="detail-pendidikan">
+                                    <option>-</option>
+                                    <option>TIDAK / BELUM SEKOLAH</option>
+                                    <option>BELUM TAMAT SD / SEDERAJAT</option>
+                                    <option>TAMAT SD / SEDERAJAT</option>
+                                    <option>SLTP / SEDERAJAT</option>
+                                    <option>SLTA / SEDERAJAT</option>
+                                    <option>DIPLOMA I / II</option>
+                                    <option>AKADEMI / DIPLOMA III / S. MUDA</option>
+                                    <option>DIPLOMA IV / STRATA I</option>
+                                    <option>STRATA II</option>
+                                    <option>STRATA III</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pekerjaan</td>
+                            <td><input type="text" class="form-control border" id="detail-pekerjaan"></td>
+                        </tr>
+                        <tr>
+                            <td>Status Kawin</td>
+                            <td>
+                                <select class="form-control border" id="detail-status">
+                                    <option>-</option>
+                                    <option>BELUM KAWIN</option>
+                                    <option>KAWIN</option>
+                                    <option>KAWIN TERCATAT</option>
+                                    <option>KAWIN BELUM TERCATAT</option>
+                                    <option>CERAI HIDUP</option>
+                                    <option>CERAI MATI</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RT</td>
+                            <td><input type="number" class="form-control border" id="detail-rt"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="wargaEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-tambah-warga" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Warga</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                      <form id="tambah-warga" method="post" action="/api/warga" enctype="multipart/form-data">
+                        <tr>
+                            <td>Nama</td>
+                            <td><input type="text" class="form-control border" id="tambah-nama" required></td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td><input type="text" class="form-control border" id="tambah-nik" required></td>
+                        </tr>
+                        <tr>
+                            <td>No KK</td>
+                            <td><input type="text" class="form-control border" id="tambah-kk" required></td>
+                        </tr>
+                        <tr>
+                            <td>Hubungan KK</td>
+                            <td>
+                                <select class="form-control border" id="tambah-hubungan" required>
+                                    <option>-</option>
+                                    <option>KEPALA KELUARGA</option>
+                                    <option>SUAMI</option>
+                                    <option>ISTERI</option>
+                                    <option>ANAK</option>
+                                    <option>MENANTU</option>
+                                    <option>CUCU</option>
+                                    <option>ORANG TUA</option>
+                                    <option>MERTUA</option>
+                                    <option>FAMILI LAIN</option>
+                                    <option>PEMBANTU</option>
+                                    <option>LAINNYA</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td>
+                                <select class="form-control border" id="tambah-kelamin" required>
+                                    <option>LAKI-LAKI</option>
+                                    <option>PEREMPUAN</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td>
+                                <input type="text" class="form-control border" data-toggle="datepicker" id="tambah-tanggal-lahir" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Agama</td>
+                            <td><input type="text" class="form-control border" id="tambah-agama"></td>
+                        </tr>
+                        <tr>
+                            <td>Pendidikan</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pendidikan" required>
+                                    <option>TIDAK / BELUM SEKOLAH</option>
+                                    <option>BELUM TAMAT SD / SEDERAJAT</option>
+                                    <option>TAMAT SD / SEDERAJAT</option>
+                                    <option>SLTP / SEDERAJAT</option>
+                                    <option>SLTA / SEDERAJAT</option>
+                                    <option>DIPLOMA I / II</option>
+                                    <option>AKADEMI / DIPLOMA III / S. MUDA</option>
+                                    <option>DIPLOMA IV / STRATA I</option>
+                                    <option>STRATA II</option>
+                                    <option>STRATA III</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pekerjaan</td>
+                            <td><input type="text" class="form-control border" id="tambah-pekerjaan" required></td>
+                        </tr>
+                        <tr>
+                            <td>Status Kawin</td>
+                            <td>
+                                <select class="form-control border" id="tambah-status" required>
+                                    <option>BELUM KAWIN</option>
+                                    <option>KAWIN TERCATAT</option>
+                                    <option>KAWIN BELUM TERCATAT</option>
+                                    <option>CERAI HIDUP</option>
+                                    <option>CERAI MATI</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RT</td>
+                            <td><input type="number" class="form-control border" id="tambah-rt" required></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-md" id="modal-upload-warga" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span>  Unggah Berkas</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <form id="upload-berkas-warga" method="post" action="/api/warga/data" enctype="multipart/form-data">
+                        <input id="datas-input" type="file" name="datas[]" multiple="multiple">
+                        <div id="loading-upload-warga">
+                            <hr>
+                            <p>Tunggu ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-pus" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail KB</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-pus-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Suami</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-suami" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Suami</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-nik-suami" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Isteri</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-isteri" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Isteri</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-nik-isteri" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>RT</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-rt" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah Anak Hidup</td>
+                            <td><input type="number" class="form-control border" id="detail-pus-jml-anak"></td>
+                        </tr>
+                        <tr>
+                            <td>Pengukuran LILA</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-lila"></td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-tahun" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Januari</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-jan">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Februari</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-feb">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maret</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-mar">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>April</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-apr">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mei</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-mei">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Juni</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-jun">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Juli</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-jul">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Agustus</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-ags">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>September</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-sep">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Oktober</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-okt">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>November</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-nov">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Desember</td>
+                            <td>
+                                <select class="form-control border" id="detail-pus-des">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><input type="text" class="form-control border" id="detail-pus-ket"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="PUSEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-tambah-pus" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Data PUS</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="number" class="form-control border" id="tambah-pus-tahun"></td>
+                        </tr>
+                        <tr>
+                            <td>Suami</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-suami">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Isteri</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-isteri">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah Anak Hidup</td>
+                            <td><input type="number" class="form-control border" id="tambah-pus-jml-anak"></td>
+                        </tr>
+                        <tr>
+                            <td>Pengukuran LILA</td>
+                            <td><input type="text" class="form-control border" id="tambah-pus-lila"></td>
+                        </tr>
+                        <tr>
+                            <td>Januari</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-jan">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Februari</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-feb">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maret</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-mar">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>April</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-apr">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mei</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-mei">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Juni</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-jun">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Juli</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-jul">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Agustus</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-ags">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>September</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-sep">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Oktober</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-okt">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>November</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-nov">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Desember</td>
+                            <td>
+                                <select class="form-control border" id="tambah-pus-des">
+                                    <option value="S">SUNTIK</option>
+                                    <option value="IAS">INGIN ANAK SEGERA (IAS)</option>
+                                    <option value="IUD">INTRAUTERINE DEVICE (IUD-SPIRAL)</option>
+                                    <option value="P">PIL (P)</option>
+                                    <option value="IP">IMPLAN (IP)</option>
+                                    <option value="Co">KONDOM (Co)</option>
+                                    <option value="MOW">STERIL WANITA (MOW)</option>
+                                    <option value="MOP">STERIL PRIA (MOP)</option>
+                                    <option value="TIAL">TIDAK INGIN ANAK LAGI (TIAL)</option>
+                                    <option value="IAT">INGIN ANAK TAPI DITUNDA (IAT)</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><input type="text" class="form-control border" id="tambah-pus-ket"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="PUSAdd()" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-md" id="modal-upload-pus" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span>  Unggah Berkas</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <form id="upload-berkas-pus" method="post" action="/api/pus/data" enctype="multipart/form-data">
+                        <input id="datas-input-pus" type="file" name="datas[]" multiple="multiple">
+                        <div id="loading-upload-pus">
+                            <hr>
+                            <p>Tunggu ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-md" id="modal-upload-balita" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span>  Unggah Berkas</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <form id="upload-berkas-balita" method="post" action="/api/balita/data" enctype="multipart/form-data">
+                        <input id="datas-input-balita" type="file" name="datas[]" multiple="multiple">
+                        <div id="loading-upload-balita">
+                            <hr>
+                            <p>Tunggu ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-tambah-balita" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Data Balita</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Bulan</td>
+                            <td>
+                                <select class="form-control border" id="tambah-balita-bulan">
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="number" class="form-control border" id="tambah-balita-tahun"></td>
+                        </tr>
+                        <tr>
+                            <td>Anak</td>
+                            <td>
+                                <select class="form-control border" id="tambah-balita-anak">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ibu</td>
+                            <td>
+                                <select class="form-control border" id="tambah-balita-ibu">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Anak Ke-</td>
+                            <td><input type="number" class="form-control border" id="tambah-balita-anak-ke"></td>
+                        </tr>
+                        <tr>
+                            <td>Berat Badan (kg)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="tambah-balita-bb"></td>
+                        </tr>
+                        <tr>
+                            <td>Tinggi Badan (cm)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="tambah-balita-tb"></td>
+                        </tr>
+                        <tr>
+                            <td>Vitamin A</td>
+                            <td>
+                                <select class="form-control border" id="tambah-balita-asi">
+                                    <option value="YA">YA</option>
+                                    <option value="TIDAK">TIDAK</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ASI Ekslusif</td>
+                            <td>
+                                <select class="form-control border" id="tambah-balita-vit-a">
+                                    <option value="YA">YA</option>
+                                    <option value="TIDAK">TIDAK</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="BalitaAdd()" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-balita" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail Balita</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-balita-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Bulan</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-bulan" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-tahun" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Anak</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-anak" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Anak</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-nik-anak" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Ibu</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-ibu" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Ibu</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-nik-ibu" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>RT</td>
+                            <td><input type="text" class="form-control border" id="detail-balita-rt" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Anak Ke-</td>
+                            <td><input type="number" class="form-control border" id="detail-balita-anak-ke"></td>
+                        </tr>
+                        <tr>
+                            <td>Berat Badan (kg)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="detail-balita-bb"></td>
+                        </tr>
+                        <tr>
+                            <td>Tinggi Badan (cm)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="detail-balita-tb"></td>
+                        </tr>
+                        <tr>
+                            <td>Vitamin A</td>
+                            <td>
+                                <select class="form-control border" id="detail-balita-asi">
+                                    <option value="YA">YA</option>
+                                    <option value="TIDAK">TIDAK</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ASI Ekslusif</td>
+                            <td>
+                                <select class="form-control border" id="detail-balita-vit-a">
+                                    <option value="YA">YA</option>
+                                    <option value="TIDAK">TIDAK</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="BalitaEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-md" id="modal-upload-hamil" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span>  Unggah Berkas</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <form id="upload-berkas-hamil" method="post" action="/api/hamil/data" enctype="multipart/form-data">
+                        <input id="datas-input-hamil" type="file" name="datas[]" multiple="multiple">
+                        <div id="loading-upload-hamil">
+                            <hr>
+                            <p>Tunggu ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-hamil" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail Ibu Hamil</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-hamil-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Bulan</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-bulan" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-tahun" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Ibu</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-ibu" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Ibu</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-nik-ibu" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Suami</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-suami" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Suami</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-nik-suami" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>RT</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-rt" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Anak Ke-</td>
+                            <td><input type="number" class="form-control border" id="detail-hamil-anak-ke"></td>
+                        </tr>
+                        <tr>
+                            <td>Jarak</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-jarak"></td>
+                        </tr>
+                        <tr>
+                            <td>Haid Terakhir</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-haid"></td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><input type="text" class="form-control border" id="detail-hamil-ket"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="HamilEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-tambah-hamil" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Data Ibu Hamil</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Bulan</td>
+                            <td>
+                                <select class="form-control border" id="tambah-hamil-bulan">
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="number" class="form-control border" id="tambah-hamil-tahun"></td>
+                        </tr>
+                        <tr>
+                            <td>Anak</td>
+                            <td>
+                                <select class="form-control border" id="tambah-hamil-anak">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ibu</td>
+                            <td>
+                                <select class="form-control border" id="tambah-hamil-ibu">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Anak Ke-</td>
+                            <td><input type="number" class="form-control border" id="tambah-hamil-anak-ke"></td>
+                        </tr>
+                        <tr>
+                            <td>Jarak</td>
+                            <td><input type="text" class="form-control border" id="tambah-hamil-jarak"></td>
+                        </tr>
+                        <tr>
+                            <td>Haid Terakhir</td>
+                            <td><input type="text" class="form-control border" id="tambah-hamil-haid"></td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><input type="text" class="form-control border" id="tambah-hamil-ket"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="HamilAdd()" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-md" id="modal-upload-bersalin" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span>  Unggah Berkas</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <form id="upload-berkas-bersalin" method="post" action="/api/bersalin/data" enctype="multipart/form-data">
+                        <input id="datas-input-bersalin" type="file" name="datas[]" multiple="multiple">
+                        <div id="loading-upload-bersalin">
+                            <hr>
+                            <p>Tunggu ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-bersalin" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail Ibu Bersalin</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-bersalin-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Bulan</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-bulan" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-tahun" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Ibu</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-ibu" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Ibu</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-nik-ibu" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Suami</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-suami" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>NIK Suami</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-nik-suami" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>RT</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-rt" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td>
+                                <input type="text" class="form-control border" data-toggle="datepicker" id="detail-bersalin-tanggal">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Anak Ke-</td>
+                            <td><input type="number" class="form-control border" id="detail-bersalin-anak-ke"></td>
+                        </tr>
+                        <tr>
+                            <td>Berat Badan (Kg)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="detail-bersalin-bb"></td>
+                        </tr>
+                        <tr>
+                            <td>Panjang Badan (cm)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="detail-bersalin-pb"></td>
+                        </tr>
+                        <tr>
+                            <td>Tindakan</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-tindakan"></td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><input type="text" class="form-control border" id="detail-bersalin-ket"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="BersalinEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-tambah-bersalin" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Data Ibu Bersalin</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Bulan</td>
+                            <td>
+                                <select class="form-control border" id="tambah-bersalin-bulan">
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tahun</td>
+                            <td><input type="number" class="form-control border" id="tambah-bersalin-tahun"></td>
+                        </tr>
+                        <tr>
+                            <td>Suami</td>
+                            <td>
+                                <select class="form-control border" id="tambah-bersalin-suami">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ibu</td>
+                            <td>
+                                <select class="form-control border" id="tambah-bersalin-ibu">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td>
+                                <input type="text" class="form-control border" data-toggle="datepicker" id="tambah-bersalin-tanggal">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Anak Ke-</td>
+                            <td><input type="number" class="form-control border" id="tambah-bersalin-anak-ke"></td>
+                        </tr>
+                        <tr>
+                            <td>Berat Badan (Kg)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="tambah-bersalin-bb"></td>
+                        </tr>
+                        <tr>
+                            <td>Panjang Badan (cm)</td>
+                            <td><input type="number" step="0.1" class="form-control border" id="tambah-bersalin-pb"></td>
+                        </tr>
+                        <tr>
+                            <td>Tindakan</td>
+                            <td><input type="text" class="form-control border" id="tambah-bersalin-tindakan"></td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><input type="text" class="form-control border" id="tambah-bersalin-ket"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="BersalinAdd()" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-md" id="modal-upload-cover" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span>  Unggah Foto</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <form id="upload-cover-image" method="post" action="/upload/image" enctype="multipart/form-data">
+                        <input name="type" id="type" type="hidden">
+                        <input id="datas-input-cover" type="file" name="datas[]" multiple="multiple">
+                        <div id="loading-upload-cover">
+                            <hr>
+                            <p>Tunggu ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-detail-produk" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Detail Produk</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" id="detail-produk-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>Nama Produk</td>
+                            <td><input type="text" class="form-control border" id="detail-produk-nama"></td>
+                        </tr>
+                        <tr>
+                            <td>Jenis</td>
+                            <td>
+                                <select class="form-control border" id="detail-produk-jenis">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Harga (Rp)</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="number" step="100" class="form-control border" id="detail-produk-harga">
+                                    </div>
+                                    /
+                                    <div class="col-4">
+                                        <input type="text" class="form-control border" id="detail-produk-satuan" value="satuan">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td><textarea class="form-control border" id="detail-produk-ket"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Gambar</td>
+                            <td><img id="detail-produk-img" src="static/images/cover_home" alt="foto produk" style="width:200px;height:200px;"/></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="produkEdit()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modal-tambah-produk" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Warga</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                <form id="tambah-produk" method="post" action="/api/produk" enctype="multipart/form-data">
+                    <table class="table table-borderless">
+                      <tr>
+                          <td>Nama Produk</td>
+                          <td><input type="text" class="form-control border" id="tambah-produk-nama" required></td>
+                      </tr>
+                      <tr>
+                          <td>Jenis</td>
+                          <td>
+                              <select class="form-control border" id="tambah-produk-jenis" required>
+                              </select>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Harga (Rp)</td>
+                          <td>
+                              <div class="row">
+                                  <div class="col">
+                                      <input type="number" step="100" class="form-control border" id="tambah-produk-harga" required>
+                                  </div>
+                                  /
+                                  <div class="col-4">
+                                      <input type="text" class="form-control border" id="tambah-produk-satuan" value="satuan" required>
+                                  </div>
+                              </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Keterangan</td>
+                          <td><textarea class="form-control border" id="tambah-produk-ket" required></textarea></td>
+                      </tr>
+                      <tr>
+                          <td>Gambar</td>
+                          <td><input id="produk-input-img" type="file" name="datas[]" multiple="multiple" required></td>
+                      </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" id="modal-add-jenis" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Tambah Jenis</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><input type="text" class="form-control border" id="jenis-name"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="addJenis()" >Tambah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" id="modal-edit-jenis" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:15px 50px;">
+                    <h6><span class="fa fa-info"></span> Edit Jenis</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:15px 50px;">
+                    <input type="hidden" class="form-control border" id="edit-jenis-id">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><input type="text" class="form-control border" id="edit-jenis-name"></td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="editJenis()" >Ubah</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</html>
+
+<script src={{ url_for('static', filename='adm/js/jquery.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/popper.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/bootstrap.min.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/main.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/toastr.min.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/datepicker.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/usia.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/warga.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/pus.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/balita.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/hamil.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/bersalin.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/setting.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/post-add.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/post-list.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/summernote.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/profil.js') }}></script>
+<script src={{ url_for('static', filename='adm/js/produk.js') }}></script>
+
+<script>
+    $('[data-toggle="datepicker"]').datepicker({
+        autoHide: true,
+        format: 'dd/mm/yyyy',
+        zIndex: 2048
+    });
+
+    initPostList();
+
+    function initPostAdd(){
+        addPostFeature();
+        addPostView();
+        $("#menu-post-add").addClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-pus").removeClass("active");
+    }
+
+    function initPostList(){
+        dataSelectCategory();
+        listPostFeature();
+        listPostView(getBlog("all"));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").addClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initProfil(){
+        profilFeature();
+        profilView();
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-post-profil").addClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-pus").removeClass("active");
+    }
+
+    function initWarga(){
+        wargaFeature();
+        wargaView(getDataWarga("all"));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").addClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initProduk(){
+        produkFeature();
+        produkView(getDataProduk("all"));
+        dataSelectJenis()
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-produk").addClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initPUS(){
+        d = new Date();
+        n = d.getFullYear();
+        $('#tambah-pus-tahun').val(n);
+        $('#tambah-pus-jml-anak').val(0);
+        $('#tambah-pus-lila').val('-');
+        $('#tambah-pus-ket').val('-');
+        $('#tambah-pus-jan').val('-');
+        $('#tambah-pus-feb').val('-');
+        $('#tambah-pus-mar').val('-');
+        $('#tambah-pus-apr').val('-');
+        $('#tambah-pus-mei').val('-');
+        $('#tambah-pus-jun').val('-');
+        $('#tambah-pus-jul').val('-');
+        $('#tambah-pus-ags').val('-');
+        $('#tambah-pus-sep').val('-');
+        $('#tambah-pus-okt').val('-');
+        $('#tambah-pus-nov').val('-');
+        $('#tambah-pus-des').val('-');
+
+        dataSelectSuami();
+        dataSelectIsteri();
+        dataSelectTahunPUS();
+        PUSFeature();
+        PUSView(getDataPUS("all", n));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-pus").addClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initBalita(){
+        d = new Date();
+        n = d.getFullYear();
+        $('#tambah-balita-tahun').val(n);
+
+        dataSelectAnak();
+        dataSelectIbu();
+        dataSelectTahunBalita();
+        BalitaFeature();
+        BalitaView(getDataBalita("all", 1, n));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-balita").addClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initHamil(){
+        d = new Date();
+        n = d.getFullYear();
+        $('#tambah-hamil-tahun').val(n);
+
+        dataSelectSuamiHamil();
+        dataSelectIbuHamil();
+        dataSelectTahunHamil();
+        HamilFeature();
+        HamilView(getDataHamil("all", 1, n));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-hamil").addClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initBersalin(){
+        d = new Date();
+        n = d.getFullYear();
+        $('#tambah-bersalin-tahun').val(n);
+
+        dataSelectSuamiBersalin();
+        dataSelectIbuBersalin();
+        dataSelectTahunBersalin();
+        BersalinFeature();
+        BersalinView(getDataBersalin("all", 1, n));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-bersalin").addClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initUsia(){
+        UsiaFeature();
+        UsiaView(getDataUsia("all"));
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-usia").addClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-pengaturan").removeClass("active");
+    }
+
+    function initSetting(){
+        settingFeature();
+        settingView();
+        $("#menu-post-add").removeClass("active");
+        $("#menu-post-list").removeClass("active");
+        $("#menu-warga").removeClass("active");
+        $("#menu-usia").removeClass("active");
+        $("#menu-balita").removeClass("active");
+        $("#menu-produk").removeClass("active");
+        $("#menu-post-profil").removeClass("active");
+        $("#menu-hamil").removeClass("active");
+        $("#menu-bersalin").removeClass("active");
+        $("#menu-pus").removeClass("active");
+        $("#menu-pengaturan").addClass("active");
+    }
+
+</script>

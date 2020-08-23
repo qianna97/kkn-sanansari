@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section id="home" class="video-hero" style="height: 500px; background-image: url(../../static/images/cover_home);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+<div class="overlay"></div>
+	<div class="display-t display-t2 text-center">
+		<div class="display-tc display-tc2">
+			<div class="container">
+				<div class="col-md-12 col-md-offset-0">
+					<div class="animate-box">
+						<h2>{{ title }}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="colorlib-work">
+	<div class="container">
+		<h2 style="text-align: center;">Profil dan Sejarah Pembentukan Kampung KB</h2>
+		<div class="row">
+			<p>{{ profiles.profil_kb|safe }}</p>
+		</div>
+	</div>
+</div>
+<div class="colorlib-work colorlib-bg-white">
+	<div class="container">
+		<h2 style="text-align: center;">Struktur Badan Pengurus</h2>
+		<div class="row" style="align-content: center;">
+			{{ profiles.struktur_kb|safe }}
+		</div>
+	</div>
+</div>
+<div class="colorlib-services colorlib-bg-white">
+	<div class="container">
+		<div class="desc">
+			<h2>Ada Pertanyaan Seputar KB ?</h2>
+			<div class="features">
+				<div class="f-desc">
+					<p>Yuk cari tahu jawaban dari pertanyaan seputar KB dengan chatbot interaktif</p>
+				</div>
+			</div>
+			<p><a href={{ url_for('chatbot_page') }} class="btn btn-primary btn-outline with-arrow">Selengkapnya <i class="icon-arrow-right3"></i></a></p>
+		</div>
+	</div>
+</div>
+<div class="colorlib-work colorlib-bg-white">
+	<div class="container">
+		<div>
+			<article class="col-md-8 animate-box" style="margin-right: 45px;">
+				<div class="row">
+					<h2>Kritik dan Saran</h2>
+					<div>
+						<form class="contact100-form validate-form">
+
+							<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+								<span class="label-input100">Nama</span>
+								<input class="input100" type="text" name="name" placeholder="Silahkan masukkan nama anda">
+								<span class="focus-input100"></span>
+							</div>
+			
+							<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+								<span class="label-input100">Email</span>
+								<input class="input100" type="text" name="email" placeholder="Silahkan masukkan email anda">
+								<span class="focus-input100"></span>
+							</div>
+			
+							<div class="wrap-input100 validate-input" data-validate = "Message is required">
+								<span class="label-input100">Pesan</span>
+								<textarea class="input100" name="message" placeholder="Silahkan masukkan pesan anda..."></textarea>
+								<span class="focus-input100"></span>
+							</div>
+			
+							<div class="container-contact100-form-btn">
+								<button class="contact100-form-btn">
+									<span>
+										Kirim
+										<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+									</span>
+								</button>
+							</div>
+						</form>						
+					</div>
+				</div>
+			</article>
+			<article class="col-md-3 animate-box">
+				<div>
+					<h2>Kunjungi Web BKKBN</h2>
+					<a href="http://kampungkb.bkkbn.go.id/profile/6404" target="_blank"><img src="static/images/bkkbn.jpg" width="250px" height="auto" alt=""></a>
+				</div>
+			</article>
+		</div>
+	</div>
+</div>
+{% endblock %}

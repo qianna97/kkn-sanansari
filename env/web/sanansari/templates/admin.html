@@ -1,0 +1,68 @@
+{% extends 'admin-base.html' %}
+
+{% block container %}
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+        </div>
+          <h1><a class="logo">Dusun Sanansari</a></h1>
+        <ul class="list-unstyled components mb-5">
+            <li id="menu-post-add">
+                <a href="#" onclick="initPostAdd();"><span class="fa fa-plus-circle mr-3"></span> Tulis Artikel</a>
+            </li>
+            <li id="menu-post-list">
+                <a href="#" onclick="initPostList();"><span class="fa fa-list mr-3"></span> Artikel</a>
+            </li>
+            <li id="menu-post-profil">
+                <a href="#" onclick="initProfil();"><span class="fa fa-hotel mr-3"></span> Profil</a>
+            </li>
+            <li id="menu-warga">
+                <a href="#" onclick="initWarga();"><span class="fa fa-users mr-3"></span> Data Warga</a>
+            </li>
+            <li id="menu-pus">
+                <a href="#" onclick="initPUS();"><span class="fa fa-stethoscope mr-3"></span> Data PUS</a>
+            </li>
+            <li id="menu-balita">
+                <a href="#" onclick="initBalita();"><span class="fa fa-baby mr-3"></span> Data Balita</a>
+            </li>
+            <li id="menu-hamil">
+                <a href="#" onclick="initHamil();"><span class="fa fa-user-md mr-3"></span> Data Ibu Hamil</a>
+            </li>
+            <li id="menu-bersalin">
+                <a href="#" onclick="initBersalin();"><span class="fa fa-user-nurse mr-3"></span> Data Ibu Bersalin</a>
+            </li>
+            <li id="menu-usia">
+                <a href="#" onclick="initUsia();"><span class="fa fa-user-friends mr-3"></span> Rentang Usia</a>
+            </li>
+            <li id="menu-produk">
+                <a href="#" onclick="initProduk();"><span class="fa fa-cash-register mr-3"></span> Produk</a>
+            </li>
+            <li id="menu-pengaturan">
+                <a href="#" onclick="initSetting()"><span class="fa fa-cogs mr-3"></span> Pengaturan</a>
+            </li>
+            <li>
+                <a href={{ url_for('logout') }}><span class="fa fa-sign-out-alt mr-3"></span> Keluar</a>
+            </li>
+        </ul>
+
+    </nav>
+    <div id="content-container" class="p-4 p-md-5 pt-5" style="width:100% !important;">
+        <h2 id="content-title" class="mb-4"></h2>
+        <div class="card" id="card">
+            <div class="card-header" id="card-header">
+                <div id="content-feature">
+                </div>
+            </div>
+            <div class="card-body" id="card-body">
+                <div id="content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

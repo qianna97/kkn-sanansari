@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Sanansari | {{ title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<link rel="stylesheet" href={{ url_for("static", filename="css/animate.css") }}>
+	<link rel="stylesheet" href={{ url_for("static", filename="css/icomoon.css") }}>
+	<link rel="stylesheet" href={{ url_for("static", filename="css/bootstrap.css") }}>
+	<link rel="stylesheet" href={{ url_for("static", filename="css/magnific-popup.css") }}>
+	<link rel="stylesheet" href={{ url_for("static", filename="css/owl.carousel.min.css") }}>
+	<link rel="stylesheet" href={{ url_for("static", filename="css/owl.theme.default.min.css") }}>
+	<link rel="stylesheet" href={{ url_for("static", filename="css/style.css") }}>
+
+	</head>
+	<body>
+
+    <div class="colorlib-loader"></div>
+
+    <div id="page">
+        <nav class="colorlib-nav" role="navigation">
+            <div class="top-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div id="sanansari-logo"><a href={{ url_for('index') }}>Sanansari</a></div>
+                        </div>
+                        <div class="col-md-10 text-right menu-1">
+                            <ul>
+                                <li><a href={{ url_for('index') }}>Utama</a></li>
+																<li><a href={{ url_for('profil_page') }}>Profil</a></li>
+																<li><a href={{ url_for('kb') }}>Kampung KB</a></li>
+                                <li><a href={{ url_for('statistik') }}>Statistik</a></li>
+                                <li><a href={{ url_for('potensi_page') }}>Potensi</a></li>
+                                <li><a href={{ url_for('get_all_post') }}>Artikel</a></li>
+                                <li><a href={{ url_for('login') }}>Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {% block container %}{% endblock %}
+
+        <footer id="colorlib-footer">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col-md-3 colorlib-widget">
+						<h4>Contact Info</h4>
+						<ul class="colorlib-footer-links">
+							<li>Padukuhan Sanansari, Desa Srimartani, Kabupaten Bantul<br> DI Yogyakarta 55172</li>
+							<li><a id="telp" href="#"><i class="icon-phone"></i></a></li>
+							<li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> sanansari@bantulkab.go.id</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3 colorlib-widget"></div>
+					<div class="col-md-3 colorlib-widget">
+						<div style="width: 100%">
+							<iframe scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=350&amp;height=200&amp;hl=en&amp;q=Padukuhan%20Sanansari+(Padukuhan%20Sanansari)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="350" height="250" frameborder="0">
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copy">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<p>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> KKN-PPM UGM 2020 Periode 2 YOG-173<br>
+Content by Karang Taruna Dusun Sanansari<br>
+Design and Template by Colorlib
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+    </div>
+
+    <div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+
+	</body>
+</html>
+
+<script src={{ url_for("static", filename="js/modernizr-2.6.2.min.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.min.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.easing.1.3.js") }}></script>
+<script src={{ url_for("static", filename="js/bootstrap.min.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.waypoints.min.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.stellar.min.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.mb.YTPlayer.min.js") }}></script>
+<script src={{ url_for("static", filename="js/owl.carousel.min.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.magnific-popup.min.js") }}></script>
+<script src={{ url_for("static", filename="js/magnific-popup-options.js") }}></script>
+<script src={{ url_for("static", filename="js/jquery.countTo.js") }}></script>
+<script src={{ url_for("static", filename="js/main.js") }}></script>
+<script>
+	$.ajax({
+		url: '/api/telp',
+		dataType: 'json',
+		method: 'get',
+		async: false,
+		success: function(ret){
+			data = ret['telp'];
+			data2 = ret['ig'];
+			$('#telp').text(data);
+			$('#telp2').text(data);
+			$('#ig').text(data2);
+			$('#telp').prop("href","tel://"+data);
+			$('a[href="https://api.whatsapp.com/send?phone=6281234567890"]').prop('href', "https://api.whatsapp.com/send?phone="+data)
+			$('a[href="http://instagram.com/"]').prop('href', "http://instagram.com/"+data2)
+		}
+	});
+</script>

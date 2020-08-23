@@ -1,0 +1,19 @@
+[x] integrasi interface
+    [x] halaman artikel
+    [x] halaman artikel per id
+    [x] kategori
+    [x] share social media
+    [x] home
+    [x] image home, artkel dll
+        [x] sampul -> home, artikel, login, per-artikel
+        [x] slide -> home
+[x] komentar
+[x] icons
+[x] produk
+[x] profil kampung KB, profil dusun sanansari
+[x] export data & format
+[x] visualisasi grafik
+[x] halaman edit visi/misi/profil
+[x] securing api
+[x] chat
+[ ] migrasi ke mysql dan import data full

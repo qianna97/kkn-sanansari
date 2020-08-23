@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<section id="home" class="video-hero" style="height: 500px; background-image: url(../../static/images/cover_img_1.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+<div class="overlay"></div>
+	<div class="display-t display-t2 text-center">
+		<div class="display-tc display-tc2">
+			<div class="container">
+				<div class="col-md-12 col-md-offset-0">
+					<div class="animate-box">
+						<h2>Data dan Statistik</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="colorlib-services">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="services">
+					<div id="jumlah_penduduk" class="chart"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="services">
+					<div id="jumlah_penduduk_per_rt" class="chart"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="services">
+					<div id="kelamin_rentang_usia" class="chart"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="services">
+					<h3></h3>
+					<div id="pendidikan" class="chart"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="services">
+					<div id="status" class="chart"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="services">
+					<div id="pekerjaan" class="chart"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md">
+				<div class="services">
+					<div id="pus" class="chart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src={{ url_for('static', filename='adm/js/jquery.js') }}></script>
+
+<script>
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.load('current', {'packages':['bar']});
+	google.charts.load('current', {packages:["orgchart"]});
+
+	google.charts.setOnLoadCallback(drawChart);
+	google.charts.setOnLoadCallback(drawChart2);
+	google.charts.setOnLoadCallback(drawChart3);
+	google.charts.setOnLoadCallback(drawChart4);
+	google.charts.setOnLoadCallback(drawChart5);
+	google.charts.setOnLoadCallback(drawChart6);
+	google.charts.setOnLoadCallback(drawChart7);
+
+	function drawChart() {
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/jumlah_penduduk/SEMUA',
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+		var data = google.visualization.arrayToDataTable(data_, true);
+
+		var options = {
+			legend: { position: 'bottom', alignment: 'start' },
+			'title':'Jumlah Penduduk'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('jumlah_penduduk'));
+
+		chart.draw(data, options);
+	}
+
+	function drawChart2() {
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/jumlah_penduduk_per_rt',
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+		var data = google.visualization.arrayToDataTable(data_, true);
+
+		var options = {
+			legend: { position: 'bottom', alignment: 'start' },
+			'title':'Jumlah Penduduk per-RT'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('jumlah_penduduk_per_rt'));
+
+		chart.draw(data, options);
+	}
+
+	function drawChart3() {
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/kelamin_rentang_usia/SEMUA',
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+		var data = google.visualization.arrayToDataTable(data_);
+
+		var options = {
+			bars: 'horizontal', // Required for Material Bar Charts.
+			colors: ['#3366cc', '#dd4477'],
+			legend: { position: 'bottom', alignment: 'start' },
+			'title':'Jenis Kelamin berdasarkan Rentang Usia'
+		};
+
+		var chart = new google.charts.Bar(document.getElementById('kelamin_rentang_usia'));
+
+		chart.draw(data, google.charts.Bar.convertOptions(options));
+	}
+
+	function drawChart4() {
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/pendidikan/SEMUA',
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+		var data = google.visualization.arrayToDataTable(data_, true);
+
+		var options = {
+			legend: { position: 'bottom', alignment: 'start' },
+			'title':'Pendidikan Ditempuh'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('pendidikan'));
+
+		chart.draw(data, options);
+	}
+
+	function drawChart5() {
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/status/SEMUA',
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+		var data = google.visualization.arrayToDataTable(data_, true);
+
+		var options = {
+			legend: { position: 'bottom', alignment: 'start' },
+			'title':'Status Perkawinan'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('status'));
+
+		chart.draw(data, options);
+	}
+
+	function drawChart6() {
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/pekerjaan/SEMUA',
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+		var data = google.visualization.arrayToDataTable(data_, true);
+
+		var options = {
+			legend: { position: 'bottom', alignment: 'start' },
+			'title':'Pekerjaan'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('pekerjaan'));
+
+		chart.draw(data, options);
+	}
+
+	function drawChart7() {
+		var currentTime = new Date()
+		var bulan = currentTime.getMonth() + 1
+		var tahun = currentTime.getFullYear()
+		var data_ = [];
+		$.ajax({
+			url: '/api/stat/pus/'+tahun+'/'+bulan,
+			dataType: 'json',
+			method: 'get',
+			async: false,
+			success: function(ret){
+				data_ = ret['data'];
+			}
+		});
+        var data = google.visualization.arrayToDataTable(data_);
+
+        var options = {
+          chart: {
+            title: 'Data Pasangan Usia Subur (PUS)',
+            subtitle: tahun.toString(),
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('pus'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+</script>
+
+{% endblock %}

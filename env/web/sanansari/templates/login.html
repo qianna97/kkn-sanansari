@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section id="home" class="video-hero" style="height: 500px; background-image: url(../../static/images/cover_login.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+	<div class="overlay"></div>
+	<div class="display-t display-t2 text-center">
+		<div class="display-tc display-tc2">
+			<div class="container">
+				<div class="col-md-12 col-md-offset-0">
+					<div class="animate-box">
+						<h2>{{ title }}</h2>
+						<p class="breadcrumbs"><span><a href="index.html">{{ category }}</a></span> <span>{{ date }}</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="colorlib-about">
+	<div class="container">
+		<form class="contact100-form validate-form" action="/login" method="post">
+			<div class="wrap-input100 validate-input" data-validate="Isi Username">
+				<input class="input100" type="text" name="loginUser" id="loginUser" placeholder="Silahkan masukkan username anda">
+				<span class="focus-input100"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input" data-validate = "Isi Password">
+				<input class="input100" type="password" name="loginPwd" id="loginPwd" placeholder="Silahkan masukkan password anda">
+				<span class="focus-input100"></span>
+			</div>
+
+			<div class="container-contact100-form-btn">
+				<button class="contact100-form-btn">
+					<span>
+						Masuk
+						<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+					</span>
+				</button>
+			</div>
+		</form>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<div class="alert alert-danger" role="alert">
+					{% for message in messages %}
+						{{ message }}
+					{% endfor %}
+				</div>
+			{% endif %}
+		{% endwith %}	
+	</div>
+</div>
+{% endblock %}
+
